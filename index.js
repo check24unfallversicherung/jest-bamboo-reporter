@@ -1,19 +1,19 @@
-var fs = require("fs");
-var path = require("path");
-var helpers = require("./helpers");
+const fs = require("fs");
+const path = require("path");
+const helpers = require("./helpers");
 
 module.exports = function (results) {
-  var output = {
+  const output = {
     stats: {},
     failures: [],
     passes: [],
     skipped: [],
   };
 
-  var filename = process.env.JEST_REPORT_FILE || "test-report.json";
-  var suiteNameTemplate =
+  const filename = process.env.JEST_REPORT_FILE || "test-report.json";
+  const suiteNameTemplate =
     process.env.JEST_BAMBOO_SUITE_NAME || "{firstAncestorTitle|filePath}";
-  var nameSeparator = process.env.JEST_BAMBOO_NAME_SEPARATOR || " – ";
+  const nameSeparator = process.env.JEST_BAMBOO_NAME_SEPARATOR || " – ";
 
   output.stats.tests = results.numTotalTests;
   output.stats.passes = results.numPassedTests;
@@ -22,13 +22,13 @@ module.exports = function (results) {
   output.stats.start = new Date(results.startTime);
   output.stats.end = new Date();
 
-  var existingTestTitles = Object.create(null);
+  const existingTestTitles = Object.create(null);
 
   results.testResults.forEach(function (suiteResult) {
-    var testFileName = path.basename(suiteResult.testFilePath);
+    const testFileName = path.basename(suiteResult.testFilePath);
 
     if (suiteResult.failureMessage && suiteResult.testResults.length === 0) {
-      var suiteName = helpers.replaceCharsNotSupportedByBamboo(
+      const suiteName = helpers.replaceCharsNotSupportedByBamboo(
         helpers.replaceVariables(suiteNameTemplate, {
           firstAncestorTitle: suiteResult.displayName,
           filePath: suiteResult.testFilePath,
@@ -46,7 +46,7 @@ module.exports = function (results) {
     }
 
     suiteResult.testResults.forEach(function (testResult) {
-      var suiteName = helpers.replaceCharsNotSupportedByBamboo(
+      const suiteName = helpers.replaceCharsNotSupportedByBamboo(
         helpers.replaceVariables(suiteNameTemplate, {
           firstAncestorTitle: testResult.ancestorTitles[0],
           filePath: suiteResult.testFilePath,
@@ -54,13 +54,13 @@ module.exports = function (results) {
           fileNameWithoutExtension: path.parse(testFileName).name,
         })
       );
-      var testTitle = helpers.replaceCharsNotSupportedByBamboo(
+      let testTitle = helpers.replaceCharsNotSupportedByBamboo(
         testResult.ancestorTitles.concat([testResult.title]).join(nameSeparator)
       );
 
       if (testTitle in existingTestTitles) {
-        var newTestTitle;
-        var counter = 1;
+        let newTestTitle;
+        let counter = 1;
         do {
           counter++;
           newTestTitle = testTitle + " (" + counter + ")";
@@ -70,7 +70,7 @@ module.exports = function (results) {
 
       existingTestTitles[testTitle] = true;
 
-      var result = {
+      const result = {
         title: testTitle,
         fullTitle: suiteName,
         duration: suiteResult.perfStats.end - suiteResult.perfStats.start,

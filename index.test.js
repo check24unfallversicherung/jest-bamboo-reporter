@@ -1,5 +1,5 @@
-var fs = require("fs");
-var jestBambooReporter = require("./index");
+const fs = require("fs");
+const jestBambooReporter = require("./index");
 
 function processReport(filename) {
   return jestBambooReporter(
@@ -20,10 +20,10 @@ describe("jest-bamboo-reporter", function () {
 
   it("should create the expected result", function () {
     processReport("jest-output.json");
-    var actualResult = JSON.parse(
+    const actualResult = JSON.parse(
       fs.readFileSync("./test-report.json", "utf8")
     );
-    var expectedResult = JSON.parse(
+    const expectedResult = JSON.parse(
       fs.readFileSync(__dirname + "/test-files/expected-result.json", "utf8")
     );
 
@@ -34,10 +34,10 @@ describe("jest-bamboo-reporter", function () {
     try {
       process.env.JEST_BAMBOO_SUITE_NAME = "{fileNameWithoutExtension}";
       processReport("jest-output.json");
-      var actualResult = JSON.parse(
+      const actualResult = JSON.parse(
         fs.readFileSync("./test-report.json", "utf8")
       );
-      var expectedResult = JSON.parse(
+      const expectedResult = JSON.parse(
         fs.readFileSync(
           __dirname + "/test-files/expected-result-with-filename.json",
           "utf8"
@@ -52,7 +52,7 @@ describe("jest-bamboo-reporter", function () {
 
   it("should report test case failures", function () {
     processReport("case-failure.json");
-    var actualResult = JSON.parse(
+    const actualResult = JSON.parse(
       fs.readFileSync("./test-report.json", "utf8")
     );
     expect(actualResult.failures.length).toBe(2);
@@ -60,7 +60,7 @@ describe("jest-bamboo-reporter", function () {
 
   it("should report test suite failures", function () {
     processReport("suite-failure.json");
-    var actualResult = JSON.parse(
+    const actualResult = JSON.parse(
       fs.readFileSync("./test-report.json", "utf8")
     );
     expect(actualResult.failures.length).toBe(1);

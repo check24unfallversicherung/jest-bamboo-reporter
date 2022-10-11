@@ -1,4 +1,4 @@
-var helpers = require("./helpers");
+const helpers = require("./helpers");
 
 describe("helpers", function () {
   it("should replace variable", function () {

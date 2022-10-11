@@ -1,4 +1,4 @@
-var EOL = require("os").EOL;
+const EOL = require("os").EOL;
 
 module.exports = {
   replaceCharsNotSupportedByBamboo: function replaceCharsNotSupportedByBamboo(
@@ -8,7 +8,7 @@ module.exports = {
   },
 
   formatErrorMessages: function formatErrorMessages(errorMessages) {
-    var lines = [];
+    const lines = [];
 
     if (errorMessages.length === 1) {
       lines.push("1 failure:");
