@@ -4,19 +4,15 @@ module.exports = {
   replaceCharsNotSupportedByBamboo: (s) => s.replace(/\./g, "_"),
 
   formatErrorMessages: (errorMessages) => {
-    const lines = [];
+    const header =
+      errorMessages.length === 1
+        ? "1 failure:"
+        : `${errorMessages.length} failures:`;
 
-    if (errorMessages.length === 1) {
-      lines.push("1 failure:");
-    } else {
-      lines.push(errorMessages.length + " failures:");
-    }
-
-    errorMessages.forEach((message) => {
-      lines.push("* " + message);
-    });
-
-    return lines.join(EOL);
+    return errorMessages.reduce(
+      (result, message) => result + EOL + `* ${message}`,
+      header
+    );
   },
 
   replaceVariables: (template, variables) => {

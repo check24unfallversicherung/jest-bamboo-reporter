@@ -63,7 +63,7 @@ module.exports = (results) => {
         let counter = 1;
         do {
           counter++;
-          newTestTitle = testTitle + " (" + counter + ")";
+          newTestTitle = `${testTitle} (${counter})`;
         } while (newTestTitle in existingTestTitles);
         testTitle = newTestTitle;
       }
@@ -92,7 +92,7 @@ module.exports = (results) => {
           break;
         default:
           throw new Error(
-            "Unexpected test result status: " + testResult.status
+            `Unexpected test result status: ${testResult.status}`
           );
       }
     });
