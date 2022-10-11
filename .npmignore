@@ -1,4 +1,5 @@
 .editorconfig
+.eslintrc.json
 .prettierrc
 package-lock.json
 jest.config.js

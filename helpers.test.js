@@ -1,13 +1,13 @@
 const helpers = require("./helpers");
 
-describe("helpers", function () {
-  it("should replace variable", function () {
+describe("helpers", () => {
+  it("should replace variable", () => {
     expect(helpers.replaceVariables("test {a} template", { a: 1 })).toEqual(
       "test 1 template"
     );
   });
 
-  it("should replace multiple variables", function () {
+  it("should replace multiple variables", () => {
     expect(
       helpers.replaceVariables("{a} test {b} template {c}", {
         a: 1,
@@ -17,7 +17,7 @@ describe("helpers", function () {
     ).toEqual("1 test 2 template 3");
   });
 
-  it("should fallback when variable is empty", function () {
+  it("should fallback when variable is empty", () => {
     expect(
       helpers.replaceVariables("test {a|b} template", { a: "", b: 2 })
     ).toEqual("test 2 template");
@@ -31,7 +31,7 @@ describe("helpers", function () {
     ).toEqual("test 1 template 2");
   });
 
-  it("should fallback multiple variables", function () {
+  it("should fallback multiple variables", () => {
     expect(
       helpers.replaceVariables("test {a|b|c} template", {
         a: "",
@@ -41,7 +41,7 @@ describe("helpers", function () {
     ).toEqual("test 3 template");
   });
 
-  it("should treat unknown variable as text", function () {
+  it("should treat unknown variable as text", () => {
     expect(
       helpers.replaceVariables("test {undefinedVariable} template", {})
     ).toEqual("test undefinedVariable template");

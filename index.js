@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const helpers = require("./helpers");
 
-module.exports = function (results) {
+module.exports = (results) => {
   const output = {
     stats: {},
     failures: [],
@@ -24,7 +24,7 @@ module.exports = function (results) {
 
   const existingTestTitles = Object.create(null);
 
-  results.testResults.forEach(function (suiteResult) {
+  results.testResults.forEach((suiteResult) => {
     const testFileName = path.basename(suiteResult.testFilePath);
 
     if (suiteResult.failureMessage && suiteResult.testResults.length === 0) {
@@ -45,7 +45,7 @@ module.exports = function (results) {
       });
     }
 
-    suiteResult.testResults.forEach(function (testResult) {
+    suiteResult.testResults.forEach((testResult) => {
       const suiteName = helpers.replaceCharsNotSupportedByBamboo(
         helpers.replaceVariables(suiteNameTemplate, {
           firstAncestorTitle: testResult.ancestorTitles[0],
