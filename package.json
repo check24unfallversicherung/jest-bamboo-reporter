@@ -1,0 +1,25 @@
+{
+  "name": "jest-bamboo-reporter",
+  "version": "1.2.1",
+  "description": "A reporter for jest which produces a report compatible with Atlassian Bamboo Mocha Test Parser",
+  "keywords": [
+    "jest",
+    "reporter",
+    "atlassian",
+    "bamboo"
+  ],
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/check24unfallversicherung/jest-bamboo-reporter.git"
+  },
+  "author": "check24unfallversicherung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/check24unfallversicherung/jest-bamboo-reporter/issues"
+  },
+  "homepage": "https://github.com/check24unfallversicherung/jest-bamboo-reporter#readme"
+}
