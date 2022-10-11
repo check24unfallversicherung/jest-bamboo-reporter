@@ -2,3 +2,5 @@
 .prettierrc
 package-lock.json
 jest.config.js
+*.test.js
+test-files/*
