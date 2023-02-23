@@ -11,9 +11,16 @@ module.exports = (results) => {
   };
 
   const filename = process.env.JEST_REPORT_FILE || "test-report.json";
+  const filePath = process.env.JEST_REPORT_FILE_PATH;
   const suiteNameTemplate =
     process.env.JEST_BAMBOO_SUITE_NAME || "{firstAncestorTitle|filePath}";
   const nameSeparator = process.env.JEST_BAMBOO_NAME_SEPARATOR || " – ";
+
+  if (filePath) {
+    if (!fs.existsSync(filePath)){
+      fs.mkdirSync(filePath);
+    }
+  }
 
   output.stats.tests = results.numTotalTests;
   output.stats.passes = results.numPassedTests;
@@ -98,6 +105,6 @@ module.exports = (results) => {
     });
   });
 
-  fs.writeFileSync(filename, JSON.stringify(output, null, 2), "utf8");
+  fs.writeFileSync(filePath? `${filePath}/${filename}` : filename, JSON.stringify(output, null, 2), "utf8");
   return results;
 };

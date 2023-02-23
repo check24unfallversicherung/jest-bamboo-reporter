@@ -52,10 +52,11 @@ Also, variable supports fallback. For example:
 
 ## Output
 
-By default, the reporter writes to `test-report.json`. The file name can be changed by setting the `JEST_REPORT_FILE` environment variable.
+By default, the reporter writes to `test-report.json` under project root directory. The file name can be changed by setting the `JEST_REPORT_FILE` environment variable and the file path can be changed by setting the `JEST_REPORT_FILE_PATH` envrionment variable.
 
 ~~~sh
-JEST_REPORT_FILE="./jest-report.json" jest
+// Writes to "./__tests__/report/jest-report.json"
+JEST_REPORT_FILE="jest-report.json" JEST_REPORT_FILE_PATH="./__tests__/report" jest
 ~~~
 
 ## License
